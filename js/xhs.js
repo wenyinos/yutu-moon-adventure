@@ -33,38 +33,38 @@
   YT.XHS = {
     available: available,
 
-    // 保存分享卡到相册；无端能力时降级为浏览器下载
+    // 保存分享卡到相册；无端能力时给出明确提示（容器禁止 a[download] 下载）
     saveImage: function (canvas, onOk, onFail) {
-      var dataUrl = canvasToDataUrl(canvas);
       var mt = miniTool();
-      if (mt && typeof mt.saveImageToPhotosAlbum === "function") {
-        callApi(
-          function () { return mt.saveImageToPhotosAlbum({ filePath: dataUrl }); },
-          function (res) { onOk(res); },
-          function (e) {
-            // 部分机型大图失败，改走临时文件
-            if (mt && typeof mt.writeTempFile === "function") {
-              callApi(
-                function () { return mt.writeTempFile({ data: dataUrl }); },
-                function (res2) {
-                  var fp = extractFilePath(res2);
-                  if (!fp) { onFail(new Error("writeTempFile 无返回路径")); return; }
-                  callApi(
-                    function () { return mt.saveImageToPhotosAlbum({ filePath: fp }); },
-                    onOk,
-                    onFail
-                  );
-                },
-                onFail
-              );
-            } else {
-              onFail(e);
-            }
-          }
-        );
-      } else {
-        downloadFallback(dataUrl, onOk, onFail);
+      if (!mt || typeof mt.saveImageToPhotosAlbum !== "function") {
+        onFail(new Error("当前环境不支持保存到相册，请在小红书客户端内使用"));
+        return;
       }
+      var dataUrl = canvasToDataUrl(canvas);
+      callApi(
+        function () { return mt.saveImageToPhotosAlbum({ filePath: dataUrl }); },
+        function (res) { onOk(res); },
+        function (e) {
+          // 部分机型大图失败，改走临时文件
+          if (typeof mt.writeTempFile === "function") {
+            callApi(
+              function () { return mt.writeTempFile({ data: dataUrl }); },
+              function (res2) {
+                var fp = extractFilePath(res2);
+                if (!fp) { onFail(new Error("writeTempFile 无返回路径")); return; }
+                callApi(
+                  function () { return mt.saveImageToPhotosAlbum({ filePath: fp }); },
+                  onOk,
+                  onFail
+                );
+              },
+              onFail
+            );
+          } else {
+            onFail(e);
+          }
+        }
+      );
     },
 
     // 发布笔记：大图先 writeTempFile 换本地路径，再 postNote
@@ -106,18 +106,4 @@
       }
     }
   };
-
-  function downloadFallback(dataUrl, onOk, onFail) {
-    try {
-      var a = document.createElement("a");
-      a.href = dataUrl;
-      a.download = "yutu_moon_result.jpg";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      onOk(null);
-    } catch (e) {
-      onFail(e);
-    }
-  }
 })();

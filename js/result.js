@@ -268,9 +268,9 @@
           YT.Audio.sfx("save");
           YT.UI.toast(YT.XHS.available() ? "已保存到相册" : "已开始下载图片");
         },
-        function () {
+        function (e) {
           self.saving = false;
-          YT.UI.toast("保存失败，请重试");
+          YT.UI.toast(e && e.message ? e.message : "保存失败，请重试");
         }
       );
     },

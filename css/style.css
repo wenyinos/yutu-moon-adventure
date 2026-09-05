@@ -85,22 +85,24 @@ button { font-family: inherit; outline: none; }
 .title-sub { margin-top: 8px; font-size: 14px; letter-spacing: 3px; color: #c9c2e6; }
 .title-best { margin-top: 14px; font-size: 14px; color: #e8d8a8; letter-spacing: 1px; }
 .title-best b { font-size: 18px; color: #ffd98a; }
-.menu { margin-top: 5vh; display: flex; flex-direction: column; align-items: center; gap: 13px; }
-.menu-row { display: flex; gap: 10px; margin-top: 4px; }
+.menu { margin-top: 5vh; display: flex; flex-direction: column; align-items: center; }
+.menu-row { display: flex; margin-top: 4px; }
 .title-footer {
-  position: absolute; bottom: calc(14px + constant(safe-area-inset-bottom));
-  bottom: calc(14px + env(safe-area-inset-bottom));
+  position: absolute; bottom: 14px;
+  bottom: calc(14px + constant(safe-area-inset-bottom));
+  bottom: calc(14px + var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px)));
   font-size: 12px; letter-spacing: 2px; color: rgba(220, 210, 245, 0.55);
 }
-#btn-sound { position: absolute; right: 16px; top: calc(16px + constant(safe-area-inset-top)); top: calc(16px + env(safe-area-inset-top)); }
+#btn-sound { position: absolute; right: 16px; top: 16px; top: calc(16px + constant(safe-area-inset-top)); top: calc(16px + var(--safe-area-inset-top, env(safe-area-inset-top, 0px))); }
 
 /* ---------- 游戏屏 ---------- */
 #screen-game { background: #0d1030; }
 #cv-bg, #cv-game { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
 #hud {
   position: absolute; left: 0; top: 0; width: 100%;
+  padding: 10px 14px 0;
   padding: calc(10px + constant(safe-area-inset-top)) 14px 0;
-  padding: calc(10px + env(safe-area-inset-top)) 14px 0;
+  padding: calc(10px + var(--safe-area-inset-top, env(safe-area-inset-top, 0px))) 14px 0;
   display: flex; justify-content: space-between; align-items: flex-start;
   pointer-events: none; z-index: 5;
 }
@@ -110,7 +112,7 @@ button { font-family: inherit; outline: none; }
 #hud-center { display: flex; flex-direction: column; align-items: center; }
 #hud-moon { width: 44px; height: 44px; }
 #hud-time { font-size: 16px; color: #fff; margin-top: -4px; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
-#hud-right { display: flex; align-items: center; gap: 8px; min-width: 90px; justify-content: flex-end; }
+#hud-right { display: flex; align-items: center; min-width: 90px; justify-content: flex-end; }
 #hud-lives { font-size: 20px; color: #ff5f7a; letter-spacing: 2px; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
 #hud-right .icon-btn { pointer-events: auto; width: 36px; height: 36px; font-size: 13px; }
 #buff-tip {
@@ -122,9 +124,10 @@ button { font-family: inherit; outline: none; }
 #buff-tip.show { opacity: 1; }
 #skill-bar {
   position: absolute; right: 14px;
+  bottom: 22px;
   bottom: calc(22px + constant(safe-area-inset-bottom));
-  bottom: calc(22px + env(safe-area-inset-bottom));
-  display: flex; flex-direction: column; gap: 12px; z-index: 6;
+  bottom: calc(22px + var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px)));
+  display: flex; flex-direction: column; z-index: 6;
 }
 .skill-btn {
   position: relative; width: 58px; height: 58px;
@@ -153,12 +156,12 @@ button { font-family: inherit; outline: none; }
   border-radius: 22px;
   background: rgba(18, 16, 48, 0.94);
   border: 1px solid rgba(217, 179, 106, 0.4);
-  display: flex; flex-direction: column; gap: 12px;
+  display: flex; flex-direction: column;
   z-index: 20;
 }
 .panel.hidden { display: none; }
 .panel h2 { text-align: center; font-size: 22px; letter-spacing: 4px; margin-bottom: 6px; }
-.panel-row { display: flex; gap: 10px; }
+.panel-row { display: flex; }
 .panel-row .btn { flex: 1; min-width: 0; font-size: 14px; padding: 10px 8px; }
 
 /* ---------- 结果页 ---------- */
@@ -178,7 +181,7 @@ button { font-family: inherit; outline: none; }
 #result-extra { font-size: 12px; color: #9a8fc9; margin-top: 6px; min-height: 16px; }
 .result-btns {
   margin-top: 12px;
-  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+  display: flex; flex-wrap: wrap; justify-content: center;
   padding: 0 18px;
 }
 .result-btns .btn { min-width: 128px; font-size: 15px; padding: 11px 16px; margin: 0; }
@@ -187,15 +190,15 @@ button { font-family: inherit; outline: none; }
 .page-head { margin-top: 6vh; font-size: 26px; letter-spacing: 6px; color: #ffe9b0; }
 .page-sub { font-size: 13px; color: #b8b0dc; margin: 8px 0 14px; letter-spacing: 1px; }
 .sec-head { font-size: 15px; color: #e8d8a8; margin: 16px 0 8px; align-self: flex-start; padding-left: 22px; letter-spacing: 2px; }
-.btn-back { min-width: 160px; margin-bottom: calc(16px + constant(safe-area-inset-bottom)); margin-bottom: calc(16px + env(safe-area-inset-bottom)); }
+.btn-back { min-width: 160px; margin-bottom: 16px; margin-bottom: calc(16px + constant(safe-area-inset-bottom)); margin-bottom: calc(16px + var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px))); }
 #screen-map, #screen-hut, #screen-ach, #screen-rank {
   background: linear-gradient(180deg, #0c0f2e, #191640 55%, #221d55);
 }
 
 /* ---------- 地图 ---------- */
-#map-list { display: flex; flex-direction: column; gap: 12px; width: 86%; max-width: 400px; }
+#map-list { display: flex; flex-direction: column; width: 86%; max-width: 400px; }
 .map-node {
-  display: flex; align-items: center; gap: 14px;
+  display: flex; align-items: center;
   padding: 14px 16px; border-radius: 16px;
   background: rgba(30, 27, 70, 0.8);
   border: 1px solid rgba(217, 179, 106, 0.35);
@@ -214,7 +217,7 @@ button { font-family: inherit; outline: none; }
 .map-flag { margin-left: auto; font-size: 18px; color: #ffd98a; }
 
 /* ---------- 小屋 ---------- */
-.grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; width: 92%; max-width: 430px; }
+.grid { display: flex; flex-wrap: wrap; justify-content: center; width: 92%; max-width: 430px; }
 .card {
   width: 47%; max-width: 200px;
   padding: 12px 10px; border-radius: 16px;
@@ -230,9 +233,9 @@ button { font-family: inherit; outline: none; }
 .card canvas { width: 64px; height: 64px; }
 
 /* ---------- 成就 / 排行 ---------- */
-#ach-list, #rank-list { width: 88%; max-width: 410px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; flex: 1; padding-bottom: 10px; }
+#ach-list, #rank-list { width: 88%; max-width: 410px; display: flex; flex-direction: column; overflow-y: auto; flex: 1; padding-bottom: 10px; }
 .ach-item, .rank-item {
-  display: flex; align-items: center; gap: 12px;
+  display: flex; align-items: center;
   padding: 12px 14px; border-radius: 14px;
   background: rgba(30, 27, 70, 0.8);
   border: 1px solid rgba(217, 179, 106, 0.25);
@@ -255,7 +258,7 @@ button { font-family: inherit; outline: none; }
 /* ---------- Toast ---------- */
 #toast-wrap {
   position: fixed; left: 0; bottom: 22%; width: 100%;
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  display: flex; flex-direction: column; align-items: center;
   pointer-events: none; z-index: 99;
 }
 .toast {
@@ -285,7 +288,7 @@ button { font-family: inherit; outline: none; }
 .about-ver { font-size: 13px; color: #b8b0dc; margin: 6px 0 10px; }
 .about-desc { font-size: 12.5px; line-height: 1.7; color: #c9c2e6; text-align: left; margin-bottom: 12px; }
 .about-row {
-  display: flex; align-items: baseline; gap: 10px;
+  display: flex; align-items: baseline;
   padding: 8px 2px;
   border-top: 1px solid rgba(217, 179, 106, 0.18);
   font-size: 13px;
@@ -296,17 +299,17 @@ button { font-family: inherit; outline: none; }
   letter-spacing: 2px;
 }
 .about-row b { color: #e8d8a8; font-weight: 600; }
-.about-row a { color: #ffd98a; text-decoration: none; word-break: break-all; }
+.about-row a, .about-repo { color: #ffd98a; text-decoration: none; word-break: break-all; }
 
 /* ---------- 玩法简介 ---------- */
 #help-list {
   width: 88%; max-width: 410px;
-  display: flex; flex-direction: column; gap: 10px;
+  display: flex; flex-direction: column;
   overflow-y: auto; flex: 1;
   margin-top: 6px; padding-bottom: 10px;
 }
 .help-item {
-  display: flex; align-items: center; gap: 14px;
+  display: flex; align-items: center;
   padding: 12px 14px; border-radius: 14px;
   background: rgba(30, 27, 70, 0.8);
   border: 1px solid rgba(217, 179, 106, 0.25);
@@ -319,6 +322,34 @@ button { font-family: inherit; outline: none; }
 #help-list::-webkit-scrollbar-track { background: transparent; }
 
 .hidden { display: none !important; }
+
+/* ---------- Chrome 61 基线：Flex 间距用 margin 替代 gap ---------- */
+.menu > * + * { margin-top: 13px; }
+.menu-row > * + * { margin-left: 10px; }
+#hud-right > * + * { margin-left: 8px; }
+#skill-bar > * + * { margin-top: 12px; }
+.panel > * + * { margin-top: 12px; }
+.panel-row > * + * { margin-left: 10px; }
+#map-list > * + * { margin-top: 12px; }
+.map-node > * + * { margin-left: 14px; }
+.map-node .map-flag { margin-left: auto; }
+#ach-list > * + *, #rank-list > * + * { margin-top: 10px; }
+.ach-item > * + * { margin-left: 12px; }
+#toast-wrap > * + * { margin-top: 8px; }
+.about-row > * + * { margin-left: 10px; }
+#help-list > * + * { margin-top: 10px; }
+.help-item > * + * { margin-left: 14px; }
+
+/* 换行容器：子项自带外边距，容器负边距抵消边侧 */
+.result-btns { margin: 12px -5px 0; }
+.result-btns .btn { margin: 0 5px 10px; }
+.grid > * { margin: 0 5px 10px; }
+
+/* ---------- 滚动容器（iOS 惯性 + 防穿透回弹） ---------- */
+#ach-list, #rank-list, #help-list, .about-card {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
 
 /* 细滚动条（成就/排行榜列表） */
 #ach-list::-webkit-scrollbar, #rank-list::-webkit-scrollbar { width: 3px; }
