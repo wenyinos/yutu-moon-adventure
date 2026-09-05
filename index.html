@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>玉兔奔月｜月宫大冒险</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ========== 主页 ========== -->
+<div class="screen" id="screen-title">
+  <div class="title-deco-moon"></div>
+  <div class="title-stars" id="title-stars"></div>
+  <canvas id="title-rabbit" width="300" height="300"></canvas>
+  <h1 class="title-main">玉兔奔月</h1>
+  <p class="title-sub">月宫大冒险 · 60秒看你能跑多远</p>
+  <div class="title-best">历史最高 <b id="title-best-score">0</b> 分</div>
+  <div class="menu">
+    <button class="btn btn-primary btn-big" id="btn-start">开始奔月</button>
+    <button class="btn" id="btn-map">冒险模式</button>
+    <button class="btn" id="btn-daily">每日挑战</button>
+    <div class="menu-row">
+      <button class="btn btn-small" id="btn-hut">玉兔小屋</button>
+      <button class="btn btn-small" id="btn-ach">成就</button>
+      <button class="btn btn-small" id="btn-rank">排行榜</button>
+    </div>
+    <div class="menu-row">
+      <button class="btn btn-small" id="btn-help">玩法简介</button>
+      <button class="btn btn-small" id="btn-about">关于</button>
+    </div>
+  </div>
+  <button class="icon-btn" id="btn-sound" aria-label="声音开关">音</button>
+  <div class="title-footer">60秒 · 收集月饼 · 躲开障碍 · 奔向满月</div>
+</div>
+
+<!-- ========== 游戏 ========== -->
+<div class="screen" id="screen-game">
+  <canvas id="cv-bg"></canvas>
+  <canvas id="cv-game"></canvas>
+  <div id="hud">
+    <div id="hud-left">
+      <div id="hud-score">0</div>
+      <div id="hud-combo"></div>
+    </div>
+    <div id="hud-center">
+      <canvas id="hud-moon" width="88" height="88"></canvas>
+      <div id="hud-time">60</div>
+    </div>
+    <div id="hud-right">
+      <div id="hud-lives"></div>
+      <button class="icon-btn" id="btn-pause" aria-label="暂停">II</button>
+    </div>
+  </div>
+  <div id="buff-tip"></div>
+  <div id="skill-bar"></div>
+  <div id="countdown" class="hidden"></div>
+  <div id="pause-panel" class="panel hidden">
+    <h2>暂停中</h2>
+    <button class="btn btn-primary" id="btn-resume">继续奔跑</button>
+    <div class="panel-row">
+      <button class="btn" id="btn-music">音乐 开</button>
+      <button class="btn" id="btn-sfx">音效 开</button>
+    </div>
+    <button class="btn" id="btn-restart">重新开始</button>
+    <button class="btn" id="btn-quit">回主页</button>
+  </div>
+</div>
+
+<!-- ========== 结果页 ========== -->
+<div class="screen" id="screen-result">
+  <h2 class="result-head">奔月结果</h2>
+  <div class="result-card-wrap">
+    <canvas id="result-card" width="540" height="960"></canvas>
+  </div>
+  <div class="result-info">
+    <div id="result-score-line"></div>
+    <div id="result-title-line"></div>
+    <div id="result-quote"></div>
+    <div id="result-extra"></div>
+  </div>
+  <div class="result-btns">
+    <button class="btn btn-primary" id="btn-again">再来一次</button>
+    <button class="btn" id="btn-card-next">换一张卡片</button>
+    <button class="btn" id="btn-save">保存图片</button>
+    <button class="btn btn-xhs" id="btn-publish">发布小红书</button>
+    <button class="btn" id="btn-home">回主页</button>
+  </div>
+</div>
+
+<!-- ========== 冒险地图 ========== -->
+<div class="screen" id="screen-map">
+  <h2 class="page-head">月宫地图</h2>
+  <p class="page-sub">从桂花林出发，一路跑到月桂神树</p>
+  <div id="map-list"></div>
+  <button class="btn btn-back" id="btn-map-back">返回</button>
+</div>
+
+<!-- ========== 玉兔小屋 ========== -->
+<div class="screen" id="screen-hut">
+  <h2 class="page-head">玉兔小屋</h2>
+  <p class="page-sub">选择皮肤与技能，上场才算数</p>
+  <h3 class="sec-head">皮肤</h3>
+  <div class="grid" id="skin-grid"></div>
+  <h3 class="sec-head">技能（最多启用两个主动技能）</h3>
+  <div class="grid" id="skill-grid"></div>
+  <button class="btn btn-back" id="btn-hut-back">返回</button>
+</div>
+
+<!-- ========== 成就 ========== -->
+<div class="screen" id="screen-ach">
+  <h2 class="page-head">成就</h2>
+  <div id="ach-list"></div>
+  <button class="btn btn-back" id="btn-ach-back">返回</button>
+</div>
+
+<!-- ========== 排行榜 ========== -->
+<div class="screen" id="screen-rank">
+  <h2 class="page-head">本机月宫排行榜</h2>
+  <div id="rank-list"></div>
+  <button class="btn btn-back" id="btn-rank-back">返回</button>
+</div>
+
+<!-- ========== 玩法简介 ========== -->
+<div class="screen" id="screen-help">
+  <h2 class="page-head">玩法简介</h2>
+  <p class="page-sub">60 秒，看你能不能跑到月亮上</p>
+  <div id="help-list"></div>
+  <button class="btn btn-back" id="btn-help-back">返回</button>
+</div>
+
+<!-- ========== 关于 ========== -->
+<div class="screen" id="screen-about">
+  <h2 class="page-head">关于</h2>
+  <div class="about-card">
+    <canvas id="about-rabbit" width="128" height="128"></canvas>
+    <div class="about-name">玉兔奔月｜月宫大冒险</div>
+    <div class="about-ver">V2.0 · 60 秒中秋奔月跑酷</div>
+    <p class="about-desc">收集月饼、躲避障碍，连击触发月华与满月冲刺；月相随进度渐满，跑完 60 秒生成中秋结果卡，保存或发布到小红书。</p>
+    <div class="about-row"><span>仓库</span><a href="https://github.com/wenyinos/yutu-moon-adventure" target="_blank" rel="noopener">github.com/wenyinos/yutu-moon-adventure</a></div>
+    <div class="about-row"><span>作者</span><b>Wenyin Root</b></div>
+    <div class="about-row"><span>技术</span><b>原生 HTML5 · Canvas 2D · Web Audio</b></div>
+    <div class="about-row"><span>资源</span><b>全程序化绘制与合成，零外部文件</b></div>
+    <div class="about-row"><span>平台</span><b>小红书小工具 · 完全离线</b></div>
+  </div>
+  <button class="btn btn-back" id="btn-about-back">返回</button>
+</div>
+
+<div id="toast-wrap"></div>
+
+<script src="data/game.js"></script>
+<script src="js/util.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/sprites.js"></script>
+<script src="js/player.js"></script>
+<script src="js/obstacle.js"></script>
+<script src="js/item.js"></script>
+<script src="js/particles.js"></script>
+<script src="js/render.js"></script>
+<script src="js/score.js"></script>
+<script src="js/achievements.js"></script>
+<script src="js/skins.js"></script>
+<script src="js/skills.js"></script>
+<script src="js/daily.js"></script>
+<script src="js/xhs.js"></script>
+<script src="js/result.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/game.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
