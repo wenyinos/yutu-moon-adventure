@@ -64,7 +64,13 @@ button { font-family: inherit; outline: none; }
 }
 
 /* ---------- 主页 ---------- */
-#screen-title { justify-content: flex-start; padding-top: 8vh; background: linear-gradient(180deg, #0c0f2e 0%, #16204e 46%, #2a2460 78%, #4a3524 100%); }
+#screen-title {
+  justify-content: flex-start;
+  padding-top: 8vh;
+  padding-top: calc(8vh + constant(safe-area-inset-top));
+  padding-top: calc(8vh + var(--safe-area-inset-top, env(safe-area-inset-top, 0px)));
+  background: linear-gradient(180deg, #0c0f2e 0%, #16204e 46%, #2a2460 78%, #4a3524 100%);
+}
 .title-deco-moon {
   position: absolute; right: 10%; top: 6%;
   width: 92px; height: 92px; border-radius: 50%;
@@ -165,7 +171,12 @@ button { font-family: inherit; outline: none; }
 .panel-row .btn { flex: 1; min-width: 0; font-size: 14px; padding: 10px 8px; }
 
 /* ---------- 结果页 ---------- */
-#screen-result { background: linear-gradient(180deg, #0c0f2e, #1d1b4e 60%, #2a2460); padding: 12px 0 16px; }
+#screen-result {
+  background: linear-gradient(180deg, #0c0f2e, #1d1b4e 60%, #2a2460);
+  padding: 12px 0 16px;
+  padding: calc(12px + constant(safe-area-inset-top)) 0 16px;
+  padding: calc(12px + var(--safe-area-inset-top, env(safe-area-inset-top, 0px))) 0 16px;
+}
 .result-head { font-size: 22px; letter-spacing: 6px; color: #ffe9b0; margin: 8px 0 6px; }
 .result-card-wrap {
   height: 46vh; flex: none;
@@ -187,7 +198,12 @@ button { font-family: inherit; outline: none; }
 .result-btns .btn { min-width: 128px; font-size: 15px; padding: 11px 16px; margin: 0; }
 
 /* ---------- 通用二级页 ---------- */
-.page-head { margin-top: 6vh; font-size: 26px; letter-spacing: 6px; color: #ffe9b0; }
+.page-head {
+  margin-top: 6vh;
+  margin-top: calc(6vh + constant(safe-area-inset-top));
+  margin-top: calc(6vh + var(--safe-area-inset-top, env(safe-area-inset-top, 0px)));
+  font-size: 26px; letter-spacing: 6px; color: #ffe9b0;
+}
 .page-sub { font-size: 13px; color: #b8b0dc; margin: 8px 0 14px; letter-spacing: 1px; }
 .sec-head { font-size: 15px; color: #e8d8a8; margin: 16px 0 8px; align-self: flex-start; padding-left: 22px; letter-spacing: 2px; }
 .btn-back { min-width: 160px; margin-bottom: 16px; margin-bottom: calc(16px + constant(safe-area-inset-bottom)); margin-bottom: calc(16px + var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px))); }
