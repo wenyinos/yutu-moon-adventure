@@ -105,4 +105,4 @@ python3 -m http.server 8765
 
 ## 许可
 
-仅供学习与平台内使用，美术与音频均为本项目程序化生成。
+本项目以 **GPL-3.0**（GNU General Public License v3.0）发布，详见 [LICENSE](LICENSE)。任何二次分发或修改须遵循同协议开源。美术与音频均为本项目程序化生成，不含第三方素材。
